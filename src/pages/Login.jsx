@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -11,7 +13,21 @@ const Login = () => {
     event.preventDefault();
     // Add your logic to handle the form submission
     console.log(email, password);
+    notify();
   };
+
+  const notify = () =>
+    toast.success("Registered Successfully!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: "Bounce",
+    });
 
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
@@ -27,7 +43,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Name"
             required
-            className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+            className="p-2 w-[20rem] focus:border-[#754ffe] focus:outline-none px-4 my-2 rounded-md border-2 border-gray-300 "
           />
           <div className="relative">
             <input
@@ -36,7 +52,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
-              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none"
             />
             <div
               onClick={() => setShowPassword(!showPassword)}
@@ -47,7 +63,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[1.5rem] bg-[#754ffe] rounded-lg "
+            className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[2rem] bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4"
           >
             Login
           </button>
@@ -57,6 +73,16 @@ const Login = () => {
               Signup
             </Link>{" "}
           </p>
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnHover
+            transition="Bounce"
+          />
         </form>
       </div>
     </div>

@@ -65,7 +65,7 @@ const Registration = () => {
               onChange={(e) => setName(e.target.value)}
               placeholder="Name"
               required
-              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none"
             />
             <input
               type="email"
@@ -73,7 +73,7 @@ const Registration = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
-              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none"
             />
             <div className="relative">
               <input
@@ -82,7 +82,7 @@ const Registration = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 required
-                className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+                className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none"
               />
               <div
                 onClick={() => setShowPassword(!showPassword)}
@@ -98,7 +98,7 @@ const Registration = () => {
                 onChange={(e) => setConfPass(e.target.value)}
                 placeholder="Confirm Password"
                 required
-                className="p-2 px-4 w-[20rem] my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+                className="p-2 px-4 w-[20rem] my-2 rounded-md border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none"
               />
               <div
                 onClick={() => setShowConfPassword(!showConfPassword)}
@@ -114,12 +114,14 @@ const Registration = () => {
               value={phnNumber}
               required={true}
               onChange={(value) => setPhnNumber(value)}
-              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-blue-500"
+              className="p-2 w-[20rem] px-4 my-2 rounded-md border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none"
             />
             <select
               value={batch}
               onChange={(e) => setBatch(e.target.value)}
-              className="p-2 w-[20rem] px-4 my-2 rounded-md text-gray-400 border-2 border-gray-300 focus:border-blue-500"
+              className={`p-2 w-[20rem] px-4 my-2 rounded-md text-${
+                batch ? "black" : "gray-400"
+              } border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none`}
             >
               {/* created a selected option which shows Select a Batch */}
               <option value="" selected className="p-2 text-gray-600">
@@ -139,7 +141,9 @@ const Registration = () => {
             <select
               value={state}
               onChange={(e) => setState(e.target.value)}
-              className="p-2 w-[20rem] px-4 my-2 rounded-md text-gray-400 border-2 border-gray-300 focus:border-blue-500"
+              className={`p-2 w-[20rem] px-4 my-2 rounded-md text-${
+                state ? "black" : "gray-400"
+              } border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none`}
             >
               <option value="" selected className="p-2 text-gray-600">
                 Select a State
@@ -259,7 +263,9 @@ const Registration = () => {
             <select
               value={repeater}
               onChange={(e) => setRepeater(e.target.value)}
-              className="p-2 w-[20rem] px-4 my-2 rounded-md text-gray-400 border-2 border-gray-300 focus:border-blue-500"
+              className={`p-2 w-[20rem] px-4 my-2 rounded-md text-${
+                repeater ? "black" : "gray-400"
+              } border-2 border-gray-300 focus:border-[#754ffe] focus:outline-none`}
             >
               <option value="" selected className="p-2 text-gray-400">
                 Are You a Repeater
@@ -276,7 +282,7 @@ const Registration = () => {
           <div className="flex flex-col">
             <button
               type="submit"
-              className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[2rem] bg-[#754ffe] rounded-lg "
+              className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[2rem] bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4"
             >
               Register
             </button>
