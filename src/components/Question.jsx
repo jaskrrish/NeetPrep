@@ -8,7 +8,6 @@ const Question = ({
   onSaveAndMarkForReview,
 }) => {
   const [selected, setSelected] = useState(selectedOption || "");
-
   useEffect(() => {
     setSelected(selectedOption || "");
   }, [selectedOption]);
@@ -46,15 +45,19 @@ const Question = ({
       <ul className="my-4">
         {question.options.map((option, index) => (
           <li key={index} className="my-8">
-            <label className="text-xl m-4">
-              <input
-                type="radio"
-                name={`question-${question.id}`}
-                value={option}
-                checked={selected === option}
-                onChange={handleOptionChange}
-                className="mr-2"
-              />
+            <input
+              type="radio"
+              name={`question-${question.options[index]}`}
+              id={`question-${question.options[index]}`}
+              value={option}
+              checked={selected === option}
+              onChange={handleOptionChange}
+              className="hidden peer"
+            />
+            <label
+              htmlFor={`question-${question.options[index]}`}
+              className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
+            >
               {option}
             </label>
           </li>
