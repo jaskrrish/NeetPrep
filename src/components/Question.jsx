@@ -39,7 +39,10 @@ const Question = ({
 
   return (
     <div className="w-[46rem] h-[30rem] ">
-      <h2 className="text-2xl w-[40rem] h-[6rem] m-4  font-semibold">
+      <h2
+        className="text-2xl w-[40rem] h-[6rem] m-4  font-semibold"
+        style={{ userSelect: "none" }}
+      >
         {question.id}. {question.question}
       </h2>
       <ul className="my-4">
@@ -57,6 +60,7 @@ const Question = ({
             <label
               htmlFor={`question-${question.options[index]}`}
               className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
+              style={{ userSelect: "none" }}
             >
               {option}
             </label>

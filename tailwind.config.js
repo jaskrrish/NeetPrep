@@ -5,6 +5,7 @@ export default {
     extend: {},
     fontFamily: {
       Outfit: ["Outfit", "sans-serif"],
+      Poppins: ["Poppins", "sans-serif"],
     },
   },
   plugins: [],

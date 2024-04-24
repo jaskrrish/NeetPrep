@@ -345,12 +345,16 @@ const Exam = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTime((prevTime) => prevTime - 1);
+      setTime((prevTime) => {
+        if (prevTime === 1) {
+          setOpenModal(true);
+          clearInterval(timer);
+        }
+        return prevTime - 1;
+      });
     }, 1000);
 
-    return () => {
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer); // This will clear the timer when the component unmounts
   }, []);
 
   const hours = Math.floor(time / 3600);
