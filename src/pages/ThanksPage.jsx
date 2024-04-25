@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaHome } from "react-icons/fa";
 import ReactConfetti from "react-confetti";
+import { Link } from "react-router-dom";
 
 const ThanksPage = () => {
   const [confetti, setConfetti] = useState(true);
@@ -26,10 +27,12 @@ const ThanksPage = () => {
         </p>
       </div>
       <div className="mt-10 ">
-        <button className="border-[0.25rem] text-[#3a2588] rounded-lg border-[#754ffe] text-xl px-4 py-1 flex transition duration-500 ease-in-out active:translate-y-4 hover:bg-[#754ffe] hover:text-white active:bg-[#754ffe] active:text-white">
-          <span className="mx-2 my-1">Home</span>{" "}
-          <FaHome size={25} className="mx-2 my-1" />{" "}
-        </button>
+        <Link to="/">
+          <button className="border-[0.25rem] text-[#3a2588] rounded-lg border-[#754ffe] text-xl px-4 py-1 flex transition duration-500 ease-in-out active:translate-y-4 hover:bg-[#754ffe] hover:text-white active:bg-[#754ffe] active:text-white">
+            <span className="mx-2 my-1">Home</span>{" "}
+            <FaHome size={25} className="mx-2 my-1" />{" "}
+          </button>
+        </Link>
       </div>
       <ReactConfetti
         className={`w-screen h-screen transition duration-500 ease-in-out ${
