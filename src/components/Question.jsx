@@ -46,26 +46,78 @@ const Question = ({
         {question.id}. {question.question}
       </h2>
       <ul className="my-4">
-        {question.options.map((option, index) => (
-          <li key={index} className="my-8">
-            <input
-              type="radio"
-              name={`question-${question.options[index]}`}
-              id={`question-${question.options[index]}`}
-              value={option}
-              checked={selected === option}
-              onChange={handleOptionChange}
-              className="hidden peer"
-            />
-            <label
-              htmlFor={`question-${question.options[index]}`}
-              className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
-              style={{ userSelect: "none" }}
-            >
-              {option}
-            </label>
-          </li>
-        ))}
+        <li className="my-8">
+          <input
+            type="radio"
+            name={`question-option_a`}
+            id={`question-option_a`}
+            value={question.option_a}
+            checked={selected === question.option_a}
+            onChange={handleOptionChange}
+            className="hidden peer"
+          />
+          <label
+            htmlFor={`question-option_a`}
+            className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
+            style={{ userSelect: "none" }}
+          >
+            {question.option_a}
+          </label>
+        </li>
+        <li className="my-8">
+          <input
+            type="radio"
+            name={`question-option_b`}
+            id={`question-option_b`}
+            value={question.option_b}
+            checked={selected === question.option_b}
+            onChange={handleOptionChange}
+            className="hidden peer"
+          />
+          <label
+            htmlFor={`question-option_b`}
+            className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
+            style={{ userSelect: "none" }}
+          >
+            {question.option_b}
+          </label>
+        </li>
+        <li className="my-8">
+          <input
+            type="radio"
+            name={`question-option_c`}
+            id={`question-option_c`}
+            value={question.option_c}
+            checked={selected === question.option_c}
+            onChange={handleOptionChange}
+            className="hidden peer"
+          />
+          <label
+            htmlFor={`question-option_c`}
+            className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
+            style={{ userSelect: "none" }}
+          >
+            {question.option_c}
+          </label>
+        </li>
+        <li className="my-8">
+          <input
+            type="radio"
+            name={`question-option_d`}
+            id={`question-option_d`}
+            value={question.option_d}
+            checked={selected === question.option_d}
+            onChange={handleOptionChange}
+            className="hidden peer"
+          />
+          <label
+            htmlFor={`question-option_d`}
+            className="text-xl p-4 rounded-xl border-2 border-black/10 bg-white bg-opacity-35 backdrop-blur-lg peer-checked:bg-[#754ffe]/10 peer-checked:font-semibold peer-checked:tracking-wider peer-checked:border-[#754ffe] peer-checked:text-[#754ffe] cursor-pointer m-4 tracking-wider flex gap-4"
+            style={{ userSelect: "none" }}
+          >
+            {question.option_d}
+          </label>
+        </li>
       </ul>
       <div className="flex gap-4 ml-4">
         <button

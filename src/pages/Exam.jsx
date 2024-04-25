@@ -3,13 +3,31 @@ import { Question, Modal } from "../components";
 import { RiTimerLine } from "react-icons/ri";
 
 const Exam = () => {
-  const [questions, setQuestions] = useState([]);
+  const [question, setQuestion] = useState([]);
+  const questions = [
+    {
+      unique_id: "60113",
+      question: "Which meristem gives rise to axillary buds?",
+      answer: "Shoot apical meristem",
+      explanation:
+        "During the formation of leaves and elongation of stem, some cells ‘left behind’ from shoot apical meristem, constitute the axillary bud.(Reference  :NCERT Biology Class 11: page no:85, paragraph no:1)",
+      topic_name:
+        "Structural Organisation In Plants And Animals >> Anatomy of Flowering Plants >> Meristematic Tissues",
+      difficulty_level: "1",
+      option_a: "Shoot apical meristem",
+      option_b: "Root apical meristem",
+      option_c: "Secondary meristems",
+      option_d: "Both a and c",
+      quiz_type: "mcq",
+      id: 1,
+    },
+  ];
 
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNzE0MDU2MzU2LCJleHAiOjE3MTQwNTk5NTZ9.sAK9cH7xVW8Nqfy26qk7jvrGyhPUjSXBs4KkeohkDok"
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNzE0MDYxMjE2LCJleHAiOjE3MTQwNjQ4MTZ9.MEXuyCgQh_yeLKRGM7chLbdX5lT9PD_p-kaSiMS0Df4"
     );
     myHeaders.append("ngrok-skip-browser-warning", "true");
 
@@ -23,9 +41,12 @@ const Exam = () => {
       "https://79b9-27-5-156-118.ngrok-free.app/api/auth/fetch-final-paper",
       requestOptions
     )
-      .then((response) => response.text())
+      .then((response) => {
+        response.json();
+        console.log;
+      })
       .then((result) => {
-        setQuestions(result);
+        setQuestion(result);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -68,7 +89,7 @@ const Exam = () => {
 
   const [buttonColors, setButtonColors] = useState(
     questions.reduce((colors, question) => {
-      colors[question[0].id] = "bg-gray-400";
+      colors[question.id] = "bg-gray-400";
       return colors;
     }, {})
   );
@@ -152,8 +173,7 @@ const Exam = () => {
     end = 30;
   }
 
-  const currentQuestion = questions.id;
-  console.log(currentQuestion);
+  const currentQuestion = questions[currentQuestionIndex];
 
   const [time, setTime] = useState(3 * 60 * 60); // Initial time in seconds
 
