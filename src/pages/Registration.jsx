@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [phnNumber, setPhnNumber] = useState(0);
@@ -18,34 +18,80 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your logic to handle the form submission
-    console.log(
-      name,
-      email,
-      phnNumber,
-      password,
-      confPass,
-      batch,
-      state,
-      repeater
-    );
-    notify();
-  };
+  const navigateTo = useNavigate();
 
-  const notify = () =>
-    toast.success("Registered Successfully!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: "Bounce",
-    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const userData = {
+      username: name,
+      email: email,
+      phoneNumber: phnNumber,
+      password: password,
+      batch: batch,
+      repeater: repeater,
+    };
+
+    try {
+      const response = await fetch(
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        // User registered successfully
+        toast.success("Registered Successfully!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: "Bounce",
+        });
+
+        // Redirect to login page
+        // You should replace '/login' with your actual login route
+        navigateTo("/login"); //TODO: wait
+      } else {
+        // User already exists or some other error occurred
+        toast.error(responseData.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: "Bounce",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: "Bounce",
+      });
+    }
+  };
 
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
@@ -282,7 +328,7 @@ const Registration = () => {
           <div className="flex flex-col">
             <button
               type="submit"
-              className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[2rem] bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4 active:bg-white active:text-[#754ffe]"
+              className="py-2 w-[20rem] font-bold text-lg font-Poppins text-white mt-[2rem] bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4 active:bg-white active:text-[#754ffe]"
             >
               Register
             </button>

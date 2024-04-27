@@ -2,38 +2,92 @@ import React, { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const history = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Add your logic to handle the form submission
-    console.log(email, password);
-    notify();
-  };
 
-  const notify = () =>
-    toast.success("Registered Successfully!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: "Bounce",
-    });
+    const userData = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch(
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        // Login successful
+        const authToken = responseData.token;
+
+        // Store authToken in localStorage
+        localStorage.setItem("authToken", authToken);
+
+        toast.success("Login Successfully!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: "Bounce",
+        });
+
+        // Redirect to exam page
+        history("/exam"); //loading
+      } else {
+        // Login failed
+        toast.error(responseData.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: "Bounce",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: "Bounce",
+      });
+    }
+  };
 
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
       <div className="w-[40rem] py-4 rounded-lg bg-white shadow-xl flex flex-col items-center justify-center">
-        <p className="text-center font-bold font-Outfit text-[#fb6871] text-3xl p-2">
-          Login
+        <p className="text-center font-bold font-Poppins text-[#fb6871] text-3xl p-2">
+          LOGIN
         </p>
         {/* form section  */}
         <form onSubmit={handleSubmit} className="my-4 mx-2 flex flex-col p-2">
@@ -41,7 +95,7 @@ const Login = () => {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Name"
+            placeholder="Email"
             required
             className="p-2 w-[20rem] focus:border-[#754ffe] focus:outline-none px-4 my-2 rounded-md border-2 border-gray-300 "
           />
@@ -68,22 +122,22 @@ const Login = () => {
             Login
           </button>
           <p className="text-center text-gray-900 my-2">
-            Dont&apos;t have an Account{" "}
+            Don&apos;t have an Account{" "}
             <Link className="text-black font-bold" to="/register">
               Signup
             </Link>{" "}
           </p>
-          <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnHover
-            transition="Bounce"
-          />
         </form>
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnHover
+          transition="Bounce"
+        />
       </div>
     </div>
   );

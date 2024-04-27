@@ -20,12 +20,11 @@ const Exam = () => {
     },
   ]);
 
+  const authToken = localStorage.getItem("authToken");
+
   useEffect(() => {
     const myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNzE0MjAyNjkyLCJleHAiOjE3MTQyMDYyOTJ9.SuojdvfyyUQWw-QyGttlfO7QsP9sqIyHlDLazUDCdeY"
-    );
+    myHeaders.append("Authorization", `Bearer ${authToken}`);
     myHeaders.append("ngrok-skip-browser-warning", "true");
 
     const requestOptions = {
@@ -36,13 +35,12 @@ const Exam = () => {
 
     try {
       fetch(
-        "https://3e1a-115-99-44-171.ngrok-free.app/api/auth/fetch-final-paper",
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/fetch-final-paper",
         requestOptions
       )
         .then((response) => response.json())
         .then((result) => {
           setQuestion(result);
-          console.log(result);
         })
         .catch((error) => console.error(error));
     } catch (error) {
@@ -196,6 +194,19 @@ const Exam = () => {
 
   const handleSubmit = () => {
     setOpenModal((openModal) => !openModal);
+    let finalAnswer = {};
+
+    questions.forEach((question) => {
+      if (question.id >= 1 && question.id <= 90) {
+        finalAnswer[question.id] = biologyAnswers[question.id] || null;
+      } else if (question.id >= 91 && question.id <= 135) {
+        finalAnswer[question.id] = physicsAnswers[question.id] || null;
+      } else if (question.id >= 136 && question.id <= 180) {
+        finalAnswer[question.id] = chemistryAnswers[question.id] || null;
+      }
+    });
+
+    console.log(finalAnswer);
   };
 
   return (
