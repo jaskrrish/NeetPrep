@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Question, Modal } from "../components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "react-phone-number-input/style.css";
 import { RiTimerLine } from "react-icons/ri";
 
 const Exam = () => {
@@ -192,9 +195,28 @@ const Exam = () => {
   const minutes = Math.floor((time % 3600) / 60);
   const seconds = time % 60;
 
-  const handleSubmit = () => {
+  let finalAnswer = {};
+
+  // const handleSubmit = () => {
+  //   setOpenModal((openModal) => !openModal);
+
+  //   questions.forEach((question) => {
+  //     if (question.id >= 1 && question.id <= 90) {
+  //       finalAnswer[question.id] = biologyAnswers[question.id] || null;
+  //     } else if (question.id >= 91 && question.id <= 135) {
+  //       finalAnswer[question.id] = physicsAnswers[question.id] || null;
+  //     } else if (question.id >= 136 && question.id <= 180) {
+  //       finalAnswer[question.id] = chemistryAnswers[question.id] || null;
+  //     }
+  //   });
+
+  //   console.log(finalAnswer);
+  // };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     setOpenModal((openModal) => !openModal);
-    let finalAnswer = {};
 
     questions.forEach((question) => {
       if (question.id >= 1 && question.id <= 90) {
@@ -206,7 +228,66 @@ const Exam = () => {
       }
     });
 
-    console.log(finalAnswer);
+    try {
+      const response = await fetch(
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/check-answers",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(finalAnswer),
+        }
+      );
+
+      const responseData = await response.json();
+
+      console.log(responseData);
+
+      if (response.ok) {
+        // User registered successfully
+        toast.success("Submit Successfully!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: "Bounce",
+        });
+
+        // Redirect to login page
+        // You should replace '/login' with your actual login route
+      } else {
+        // User already exists or some other error occurred
+        toast.error(responseData.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: "Bounce",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: "Bounce",
+      });
+    }
   };
 
   return (
@@ -339,6 +420,16 @@ const Exam = () => {
         biology={Object.keys(biologyAnswers).length}
         physics={Object.keys(physicsAnswers).length}
         chemistry={Object.keys(chemistryAnswers).length}
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnHover
+        transition="Bounce"
       />
     </div>
   );
