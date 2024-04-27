@@ -159,20 +159,8 @@ const Hero = () => {
                     offset={0}
                     duration={350}
                   >
-                    <button className="py-1.5 px-4 font-bold text-lg font-Outfit text-white bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4">
+                    <button className="cursor-pointer py-1.5 px-4 font-bold text-lg font-Outfit text-white bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4">
                       Get Started
-                    </button>
-                  </ScrollLink>
-                  <ScrollLink
-                    to="video-section"
-                    spy={true}
-                    smooth={true}
-                    offset={0}
-                    duration={350}
-                  >
-                    <button className="flex py-1.5 px-4 font-bold text-lg font-Outfit bg-transparent rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4">
-                      <PlayArrowIcon />
-                      Watch Video
                     </button>
                   </ScrollLink>
                 </Box>
@@ -189,19 +177,9 @@ const Hero = () => {
               </Box>
             </Grid>
           </Grid>
-
-          {/* Experience */}
-          <Box sx={{ boxShadow: 2, py: 4, px: 7, borderRadius: 4 }}>
-            <Grid container spacing={2}>
-              {exps.map((item) => (
-                <Grid key={item.value} item xs={12} md={4}>
-                  <ExpItem item={item} />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
         </Container>
       </Box>
+      <hr className="border-[#754ffe] mx-[9rem] border-[1.5px]" />
       <div className="w-screen my-6 flex flex-wrap-reverse justify-center items-center">
         <div className="mx-8 font-Poppins">
           <p className="capitalize tracking-wider m-6 text-left sm:text-5xl text-4xl font-bold">

@@ -8,11 +8,18 @@ import AuthNavigation from "./AuthNavigation";
 import { useTheme } from "@mui/material/styles";
 import { Menu, Close } from "@mui/icons-material";
 import Logo from "./Logo";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
   const [visibleMenu, setVisibleMenu] = useState(false);
   const { breakpoints } = useTheme();
   const matchMobileView = useMediaQuery(breakpoints.down("md"));
+
+  if (location.pathname === "/exam") {
+    return null;
+  }
+
   return (
     <div>
       <Box sx={{ backgroundColor: "background.paper" }}>

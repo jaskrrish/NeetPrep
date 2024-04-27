@@ -3,31 +3,28 @@ import { Question, Modal } from "../components";
 import { RiTimerLine } from "react-icons/ri";
 
 const Exam = () => {
-  const [question, setQuestion] = useState([]);
-  const questions = [
+  const [questions, setQuestion] = useState([
     {
-      unique_id: "60113",
-      question: "Which meristem gives rise to axillary buds?",
-      answer: "Shoot apical meristem",
-      explanation:
-        "During the formation of leaves and elongation of stem, some cells ‘left behind’ from shoot apical meristem, constitute the axillary bud.(Reference  :NCERT Biology Class 11: page no:85, paragraph no:1)",
-      topic_name:
-        "Structural Organisation In Plants And Animals >> Anatomy of Flowering Plants >> Meristematic Tissues",
-      difficulty_level: "1",
-      option_a: "Shoot apical meristem",
-      option_b: "Root apical meristem",
-      option_c: "Secondary meristems",
-      option_d: "Both a and c",
-      quiz_type: "mcq",
-      id: 1,
+      unique_id: "",
+      question: "",
+      answer: "",
+      explanation: "",
+      topic_name: "",
+      difficulty_level: "",
+      option_a: "",
+      option_b: "",
+      option_c: "",
+      option_d: "",
+      quiz_type: "",
+      id: "",
     },
-  ];
+  ]);
 
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNzE0MDYxMjE2LCJleHAiOjE3MTQwNjQ4MTZ9.MEXuyCgQh_yeLKRGM7chLbdX5lT9PD_p-kaSiMS0Df4"
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyfSwiaWF0IjoxNzE0MjAyNjkyLCJleHAiOjE3MTQyMDYyOTJ9.SuojdvfyyUQWw-QyGttlfO7QsP9sqIyHlDLazUDCdeY"
     );
     myHeaders.append("ngrok-skip-browser-warning", "true");
 
@@ -37,18 +34,20 @@ const Exam = () => {
       redirect: "follow",
     };
 
-    fetch(
-      "https://79b9-27-5-156-118.ngrok-free.app/api/auth/fetch-final-paper",
-      requestOptions
-    )
-      .then((response) => {
-        response.json();
-        console.log;
-      })
-      .then((result) => {
-        setQuestion(result);
-      })
-      .catch((error) => console.error(error));
+    try {
+      fetch(
+        "https://3e1a-115-99-44-171.ngrok-free.app/api/auth/fetch-final-paper",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setQuestion(result);
+          console.log(result);
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const [selectedSubject, setSelectedSubject] = useState("Biology");
@@ -81,9 +80,9 @@ const Exam = () => {
     if (event.target.value === "Biology") {
       setCurrentQuestionIndex(0); // First question of Biology
     } else if (event.target.value === "Physics") {
-      setCurrentQuestionIndex(10); // First question of Physics
+      setCurrentQuestionIndex(90); // First question of Physics
     } else if (event.target.value === "Chemistry") {
-      setCurrentQuestionIndex(20); // First question of Chemistry
+      setCurrentQuestionIndex(135); // First question of Chemistry
     }
   };
 
@@ -164,13 +163,13 @@ const Exam = () => {
   let start, end;
   if (selectedSubject === "Biology") {
     start = 1;
-    end = 10;
+    end = 90;
   } else if (selectedSubject === "Physics") {
-    start = 11;
-    end = 20;
+    start = 91;
+    end = 135;
   } else if (selectedSubject === "Chemistry") {
-    start = 21;
-    end = 30;
+    start = 136;
+    end = 180;
   }
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -203,7 +202,7 @@ const Exam = () => {
     <div className="flex flex-col justify-center my-4">
       <div className=" flex gap-4 justify-around">
         <div className="flex flex-col w-4/6 ml-[2rem] rounded-lg shadow-xl">
-          <div className="m-4 p-6  w-[50rem] h-[38rem] rounded-md">
+          <div className="m-4 p-6  w-[50rem] h-fit min-h-full rounded-md">
             <Question
               question={currentQuestion}
               selectedOption={answers[currentQuestion.id]}
@@ -235,7 +234,7 @@ const Exam = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col m-4 flex-wrap gap-6 w-2/6 h-full p-4 overflow-auto">
+        <div className="flex flex-col m-4 flex-wrap gap-6 w-2/6 p-4 overflow-auto">
           <div className="flex justify-center items-center my-4 py-1.5 border-[1px] border-black/20 rounded-lg">
             <label
               className={`inline-flex items-center mx-4 cursor-pointer ${
@@ -296,19 +295,23 @@ const Exam = () => {
             </label>
           </div>
           <div className="flex m-4 mx-[2rem] flex-wrap gap-6 peer">
-            {questions
-              .filter((question) => question.id >= start && question.id <= end)
-              .map((question) => (
-                <button
-                  key={question.id}
-                  onClick={() => handleQuestionChange(question.id - 1)}
-                  className={`text-white font-bold w-[3.5rem] m-1 h-[3.5rem] rounded-tr-xl rounded-bl-xl shadow-sm hover:shadow-xl p-4 ${
-                    buttonColors[question.id]
-                  }`}
-                >
-                  {question.id}
-                </button>
-              ))}
+            <div className="h-[30rem] overflow-auto">
+              {questions
+                .filter(
+                  (question) => question.id >= start && question.id <= end
+                )
+                .map((question) => (
+                  <button
+                    key={question.id}
+                    onClick={() => handleQuestionChange(question.id - 1)}
+                    className={`bg-gray-400 text-white font-bold w-[3.5rem] m-1 h-[3.5rem] rounded-tr-xl rounded-bl-xl shadow-sm hover:shadow-xl p-4 ${
+                      buttonColors[question.id]
+                    }`}
+                  >
+                    {question.id}
+                  </button>
+                ))}
+            </div>
           </div>
           <div className="flex mt-[4rem] ml-[2.5rem]">
             <RiTimerLine size={40} />
