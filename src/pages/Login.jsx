@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "https://2472-115-99-44-171.ngrok-free.app/api/auth/login",
+        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/login",
         {
           method: "POST",
           headers: {

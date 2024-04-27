@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Question, Modal } from "../components";
+import { Question, Modal, Result } from "../components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-phone-number-input/style.css";
@@ -38,7 +38,7 @@ const Exam = () => {
 
     try {
       fetch(
-        "https://2472-115-99-44-171.ngrok-free.app/api/auth/fetch-final-paper",
+        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/fetch-final-paper",
         requestOptions
       )
         .then((response) => response.json())
@@ -59,6 +59,8 @@ const Exam = () => {
   const [physicsAnswers, setPhysicsAnswers] = useState({});
   const [chemistryAnswers, setChemistryAnswers] = useState({});
   const [openModal, setOpenModal] = useState(false);
+  const [result, setResult] = useState({});
+  const [resultModal, setResultModal] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -160,6 +162,9 @@ const Exam = () => {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+  const handleResultModal = () => {
+    setOpenModal(false);
+  };
 
   let start, end;
   if (selectedSubject === "Biology") {
@@ -197,22 +202,6 @@ const Exam = () => {
 
   let finalAnswer = {};
 
-  // const handleSubmit = () => {
-  //   setOpenModal((openModal) => !openModal);
-
-  //   questions.forEach((question) => {
-  //     if (question.id >= 1 && question.id <= 90) {
-  //       finalAnswer[question.id] = biologyAnswers[question.id] || null;
-  //     } else if (question.id >= 91 && question.id <= 135) {
-  //       finalAnswer[question.id] = physicsAnswers[question.id] || null;
-  //     } else if (question.id >= 136 && question.id <= 180) {
-  //       finalAnswer[question.id] = chemistryAnswers[question.id] || null;
-  //     }
-  //   });
-
-  //   console.log(finalAnswer);
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -230,7 +219,7 @@ const Exam = () => {
 
     try {
       const response = await fetch(
-        "https://2472-115-99-44-171.ngrok-free.app/api/auth/check-answers",
+        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/check-answers",
         {
           method: "POST",
           headers: {
@@ -243,6 +232,8 @@ const Exam = () => {
       const responseData = await response.json();
 
       console.log(responseData);
+      setResult(responseData);
+      setResultModal(true);
 
       if (response.ok) {
         // User registered successfully
@@ -290,6 +281,10 @@ const Exam = () => {
     }
   };
 
+  const handleModalSubmit = () => {
+    setOpenModal((Modal) => !Modal);
+  };
+
   return (
     <div className="flex flex-col justify-center my-4">
       <div className=" flex gap-4 justify-around">
@@ -320,7 +315,7 @@ const Exam = () => {
             </div>
             <button
               className="py-2 w-[10rem] font-bold text-lg font-Outfit text-white bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4"
-              onClick={handleSubmit}
+              onClick={handleModalSubmit}
             >
               Submit
             </button>
@@ -416,14 +411,20 @@ const Exam = () => {
       </div>
       <Modal
         openModal={openModal}
+        handleSubmit={handleSubmit}
         handleCloseModal={handleCloseModal}
         biology={Object.keys(biologyAnswers).length}
         physics={Object.keys(physicsAnswers).length}
         chemistry={Object.keys(chemistryAnswers).length}
       />
+      <Result
+        result={result}
+        resultModal={resultModal}
+        handleResultModal={handleResultModal}
+      />
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

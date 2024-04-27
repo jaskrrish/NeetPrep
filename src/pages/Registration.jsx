@@ -34,7 +34,7 @@ const Registration = () => {
 
     try {
       const response = await fetch(
-        "https://2472-115-99-44-171.ngrok-free.app/api/auth/register",
+        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/register",
         {
           method: "POST",
           headers: {

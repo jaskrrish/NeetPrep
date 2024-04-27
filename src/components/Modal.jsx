@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Modal = ({
   openModal,
   handleCloseModal,
+  handleSubmit,
   biology,
   physics,
   chemistry,
@@ -67,14 +68,13 @@ const Modal = ({
           </div>
         </div>
         <div className="flex justify-center mt-[2rem]">
-          <Link to="/thanks">
-            <button
-              type="submit"
-              className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[2rem] bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4"
-            >
-              Submit
-            </button>
-          </Link>
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="py-2 w-[20rem] font-bold text-lg font-Outfit text-white mt-[2rem] bg-[#754ffe] rounded-lg hover:shadow-lg border-2 border-[#754ffe] hover:bg-white hover:text-[#754ffe] transition duration-500 ease-in-out active:translate-y-4"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
