@@ -2,7 +2,10 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div role="status">
+    <div
+      role="status"
+      className="h-screen w-screen flex items-center justify-center"
+    >
       <svg
         aria-hidden="true"
         className="w-20 h-20 text-gray-200 animate-spin fill-[#754ffe]"

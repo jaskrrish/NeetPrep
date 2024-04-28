@@ -2,16 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import {
-  Registration,
-  Home,
-  Login,
-  Exam,
-  ThanksPage,
-  Contact,
-  Rules,
-} from "./pages";
+import { Registration, Home, Login, Exam, ThanksPage, Rules } from "./pages";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+function PrivateRoute({ children }) {
+  const authToken = localStorage.getItem("authToken");
+  return authToken ? children : <Navigate to="/register" replace />;
+}
 
 const router = createBrowserRouter([
   {
@@ -32,19 +30,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/exam",
-        element: <Exam />,
+        element: (
+          <PrivateRoute>
+            <Exam />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/thanks",
-        element: <ThanksPage />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
+        element: (
+          <PrivateRoute>
+            <ThanksPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/rules",
-        element: <Rules />,
+        element: (
+          <PrivateRoute>
+            <Rules />
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",

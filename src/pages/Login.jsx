@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "https://2472-115-99-44-171.ngrok-free.app/api/auth/login",
+        "https://prepneet-8b39ec2de718.herokuapp.com/api/auth/login",
         {
           method: "POST",
           headers: {
@@ -49,7 +49,9 @@ const Login = () => {
         toast.success("Login Successfully!");
         setIsLoading(false);
         // Redirect to exam page
-        navigate("/"); //loading
+        setTimeout(() => {
+          navigate("/"); //loading
+        }, 3000);
       } else {
         // Login failed
         setIsLoading(false);
@@ -65,7 +67,9 @@ const Login = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
       {isLoading ? (
-        <Loading />
+        <div className="w-screen h-screen flex items-center justify-center">
+          <Loading />
+        </div>
       ) : (
         <div className="w-[40rem] py-4 rounded-lg bg-white shadow-xl flex flex-col items-center justify-center">
           <p className="text-center font-bold font-Poppins text-[#fb6871] text-3xl p-2">
@@ -110,15 +114,15 @@ const Login = () => {
               </Link>{" "}
             </p>
           </form>
-          <Toaster
-            expand
-            visibleToasts={9}
-            position="top-center"
-            closeButton
-            richColors
-          />
         </div>
       )}
+      <Toaster
+        expand
+        visibleToasts={9}
+        position="top-center"
+        closeButton
+        richColors
+      />
     </div>
   );
 };

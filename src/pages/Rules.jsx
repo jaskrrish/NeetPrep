@@ -127,7 +127,7 @@ const Rules = () => {
             examination as per your convenience only during the time stipulated.
           </li>
           <li className="my-3">
-            Candidate can view the corresponding section summery as part of the
+            Candidate can view the corresponding section summary as part of the
             legend that appears in every section above the question palette.
           </li>
         </ul>
