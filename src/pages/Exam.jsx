@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Question, Modal, Result } from "../components";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "react-phone-number-input/style.css";
 import { RiTimerLine } from "react-icons/ri";
+import { Toaster, toast } from "sonner";
 
 const Exam = () => {
   const [questions, setQuestion] = useState([
@@ -24,6 +22,7 @@ const Exam = () => {
   ]);
 
   const authToken = localStorage.getItem("authToken");
+  const emailName = localStorage.getItem("emailName");
 
   useEffect(() => {
     const myHeaders = new Headers();
@@ -38,7 +37,7 @@ const Exam = () => {
 
     try {
       fetch(
-        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/fetch-final-paper",
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/fetch-final-paper",
         requestOptions
       )
         .then((response) => response.json())
@@ -200,7 +199,9 @@ const Exam = () => {
   const minutes = Math.floor((time % 3600) / 60);
   const seconds = time % 60;
 
-  let finalAnswer = {};
+  let finalAnswer = {
+    username: emailName,
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -219,7 +220,7 @@ const Exam = () => {
 
     try {
       const response = await fetch(
-        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/check-answers",
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/check-answers",
         {
           method: "POST",
           headers: {
@@ -237,17 +238,7 @@ const Exam = () => {
 
       if (response.ok) {
         // User registered successfully
-        toast.success("Submit Successfully!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: "Bounce",
-        });
+        toast.success("Submit Successfully!");
 
         // Redirect to login page
         // You should replace '/login' with your actual login route
@@ -287,8 +278,15 @@ const Exam = () => {
 
   return (
     <div className="flex flex-col justify-center my-4">
-      <div className=" flex gap-4 justify-around">
-        <div className="flex flex-col w-4/6 ml-[2rem] rounded-lg shadow-xl">
+      <div className="flex gap-4 justify-around">
+        <div className="flex flex-col md:w-4/6 sm:w-full ml-[2rem] rounded-lg shadow-xl">
+          <div className="flex mt-3 justify-end mr-[2rem]">
+            <RiTimerLine size={40} />
+            <p className="m-2 text-lg font-semibold tracking-wider">
+              {hours}:{minutes < 10 ? `0${minutes}` : minutes}:
+              {seconds < 10 ? `0${seconds}` : seconds}
+            </p>
+          </div>
           <div className="m-4 p-6  w-[50rem] h-fit min-h-full rounded-md">
             <Question
               question={currentQuestion}
@@ -298,7 +296,7 @@ const Exam = () => {
               onSaveAndMarkForReview={handleSaveAndMarkForReview}
             />
           </div>
-          <div className="flex my-4 mx-6 justify-between items-center">
+          <div className="flex my-4 mx-6 md:justify-between sm:justify-around items-center">
             <div>
               <button
                 className="border-2 border-black px-3 py-1.5 font-bold text-lg rounded-md m-2"
@@ -321,7 +319,7 @@ const Exam = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col m-4 flex-wrap gap-6 w-2/6 p-4 overflow-auto">
+        <div className="md:flex flex-col m-4 flex-wrap gap-6 w-2/6 p-4 overflow-auto sm:hidden">
           <div className="flex justify-center items-center my-4 py-1.5 border-[1px] border-black/20 rounded-lg">
             <label
               className={`inline-flex items-center mx-4 cursor-pointer ${
@@ -400,13 +398,6 @@ const Exam = () => {
                 ))}
             </div>
           </div>
-          <div className="flex mt-[4rem] ml-[2.5rem]">
-            <RiTimerLine size={40} />
-            <p className="m-2 text-lg font-semibold tracking-wider">
-              {hours}:{minutes < 10 ? `0${minutes}` : minutes}:
-              {seconds < 10 ? `0${seconds}` : seconds}
-            </p>
-          </div>
         </div>
       </div>
       <Modal
@@ -422,15 +413,12 @@ const Exam = () => {
         resultModal={resultModal}
         handleResultModal={handleResultModal}
       />
-      <ToastContainer
+      <Toaster
+        expand
+        visibleToasts={9}
         position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnHover
-        transition="Bounce"
+        closeButton
+        richColors
       />
     </div>
   );

@@ -4,23 +4,8 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { Link as ScrollLink } from "react-scroll";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Bitmap from "../assets/Bitmap.png";
-
-const exps = [
-  {
-    label: "Students",
-    value: "10K+",
-  },
-  {
-    label: "Quality Course",
-    value: "20+",
-  },
-  {
-    label: "Experience Mentors",
-    value: "10+",
-  },
-];
+import HeroBg from "../assets/home-hero.jpg";
 
 const ExpItem = ({ item }) => {
   const { value, label } = item;
@@ -168,19 +153,14 @@ const Hero = () => {
             </Grid>
             <Grid item xs={12} md={5} sx={{ position: "relative" }}>
               <Box sx={{ lineHeight: 0 }}>
-                <img
-                  src="/src/assets/home-hero.jpg"
-                  width={775}
-                  height={787}
-                  alt="Hero img"
-                />
+                <img src={HeroBg} width={775} height={787} alt="Hero img" />
               </Box>
             </Grid>
           </Grid>
         </Container>
       </Box>
       <hr className="border-[#754ffe] mx-[9rem] border-[1.5px]" />
-      <div className="w-screen my-6 flex flex-wrap-reverse justify-center items-center">
+      <div className="w-screen my-[4rem] flex flex-wrap-reverse justify-center items-center">
         <div className="mx-8 font-Poppins">
           <p className="capitalize tracking-wider m-6 text-left sm:text-5xl text-4xl font-bold">
             Take Online Exam.
@@ -194,6 +174,34 @@ const Hero = () => {
         </div>
         <div>
           <img src={Bitmap} alt="Bitmap" className="w-[20rem] mx-10" />
+        </div>
+      </div>
+      <hr className="border-[#754ffe] mx-[9rem] border-[1.5px]" />
+      <div className="mt-[2rem] flex flex-col items-center justify-center">
+        <p className="text-3xl text-[#754ffe] font-Poppins text-center font-bold m-4">
+          Upcoming Tests
+        </p>
+        <div className="my-[3rem] ">
+          <table className=" w-[70rem] text-center">
+            <thead className="bg-gray-50 border-gray-200">
+              <tr>
+                <th className="px-4 text-2xl py-4 font-semibold tracking-wide">
+                  Tests
+                </th>
+                <th className="px-4 py-4 text-2xl font-semibold tracking-wide">
+                  Date
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-4 text-xl">NEET-2024 Mock Test</td>
+                <td className="p-4 text-xl text-[#754ffe] text-center font-bold">
+                  2nd May,2024
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

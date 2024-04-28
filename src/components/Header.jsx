@@ -16,7 +16,7 @@ const Header = () => {
   const { breakpoints } = useTheme();
   const matchMobileView = useMediaQuery(breakpoints.down("md"));
 
-  if (location.pathname === "/exam") {
+  if (location.pathname === "/exam" || location.pathname === "/rules") {
     return null;
   }
 

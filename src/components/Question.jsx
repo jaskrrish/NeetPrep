@@ -38,9 +38,9 @@ const Question = ({
   };
 
   return (
-    <div className="w-[46rem] h-fit  ">
+    <div className="md:w-[46rem] sm:w-fit h-fit  ">
       <h2
-        className="text-2xl w-[40rem] max-h-fit h-fit m-4  font-semibold"
+        className="text-2xl md:w-[40rem] sm:w-fit max-h-fit h-fit m-4  font-semibold"
         style={{ userSelect: "none" }}
       >
         {question.id}. {question.question}

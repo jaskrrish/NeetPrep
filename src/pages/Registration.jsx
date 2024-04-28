@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 const Registration = () => {
   const [phnNumber, setPhnNumber] = useState(0);
@@ -23,6 +22,19 @@ const Registration = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (password !== confPass) {
+      toast.error("Password and Confirm Password should be same");
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password should be at least 8 characters long and alphanumeric."
+      );
+      return;
+    }
+
     const userData = {
       username: name,
       email: email,
@@ -34,7 +46,7 @@ const Registration = () => {
 
     try {
       const response = await fetch(
-        "https://inadequate-caitlin-jaskrrish.koyeb.app/api/auth/register",
+        "https://2472-115-99-44-171.ngrok-free.app/api/auth/register",
         {
           method: "POST",
           headers: {
@@ -48,48 +60,18 @@ const Registration = () => {
 
       if (response.ok) {
         // User registered successfully
-        toast.success("Registered Successfully!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: "Bounce",
-        });
+        toast.success("Registered Successfully!");
 
         // Redirect to login page
         // You should replace '/login' with your actual login route
         navigateTo("/login"); //TODO: wait
       } else {
         // User already exists or some other error occurred
-        toast.error(responseData.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: "Bounce",
-        });
+        toast.error(responseData.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("An error occurred. Please try again later.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: "Bounce",
-      });
+      toast.error("An error occurred. Please try again later.");
     }
   };
 
@@ -339,15 +321,12 @@ const Registration = () => {
               </Link>{" "}
             </p>
           </div>
-          <ToastContainer
+          <Toaster
+            expand
+            visibleToasts={9}
             position="top-center"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnHover
-            transition="Bounce"
+            closeButton
+            richColors
           />
         </form>
       </div>

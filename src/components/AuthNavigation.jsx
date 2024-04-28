@@ -1,8 +1,20 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 
 const AuthNavigation = () => {
+  const emailName = localStorage.getItem("emailName");
+
+  if (emailName) {
+    return (
+      <div className="flex items-center gap-1 text-[#754ffe] text-xl font-bold">
+        <CgProfile size={30} />
+        <span className="capitalize">{emailName}</span>
+      </div>
+    );
+  }
+
   return (
     <Box sx={{ "& button:first-child": { mr: 2 } }}>
       <Link to="/login">
