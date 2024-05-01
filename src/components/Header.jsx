@@ -47,13 +47,15 @@ const Header = () => {
     <div>
       {location.pathname === "/" && (
         <div
-          className={`flex justify-between border-b-2 border-b-[#4728b9] top-0 py-4 text-white bg-gradient-to-r from-[#55e7d4] via-[#736efe] ${
+          className={`md:flex sm:hidden justify-between border-b-2 border-b-[#4728b9] top-0 py-4 text-white bg-gradient-to-r from-[#55e7d4] via-[#736efe] ${
             !ribbon && "hidden"
           }`}
         >
-          <div className="font-Poppins flex font-bold text-lg ml-[2rem]">
-            <p>✨The Next All India Neet Test is happening in</p>
-            <span className="font-bold text-xl mx-2">
+          <div className="font-Poppins flex font-bold sm:text-sm md:text-lg ml-[2rem]">
+            <p className="text-clip">
+              ✨The Next All India Neet Test is happening in
+            </p>
+            <span className="font-bold sm:text-lg md:text-xl mx-2">
               {Math.floor(timeLeft / (1000 * 60 * 60))} hrs:{" "}
               {Math.floor((timeLeft / (1000 * 60)) % 60)} min:{" "}
               {Math.floor((timeLeft / 1000) % 60)} sec
@@ -75,8 +77,12 @@ const Header = () => {
           >
             <Logo />
             <Box
-              sx={{ ml: "auto", display: { xs: "inline-flex", md: "none" } }}
+              sx={{
+                ml: "auto",
+                display: { xs: "inline-flex", md: "none" },
+              }}
             >
+              <AuthNavigation />
               <IconButton onClick={() => setVisibleMenu(!visibleMenu)}>
                 <Menu />
               </IconButton>

@@ -165,8 +165,11 @@ const Hero = () => {
           </Grid>
         </Container>
       </Box>
-      <hr className="border-[#754ffe] sm:mx-[5rem] md:mx-[9rem] border-[1.5px]" />
-      <div className="w-screen my-[4rem] flex flex-wrap-reverse justify-center items-center">
+      <hr className="border-[#754ffe] sm:mx-[3rem] md:mx-[9rem] border-[1.5px]" />
+      <div
+        id="about"
+        className="w-screen my-[4rem] flex flex-wrap-reverse justify-center items-center"
+      >
         <div className="mx-8 font-Poppins">
           <p className="capitalize tracking-wider m-6 text-left sm:text-5xl text-4xl font-bold">
             Take Online Exam.
@@ -182,7 +185,7 @@ const Hero = () => {
           <img src={Bitmap} alt="Bitmap" className="w-[20rem] mx-10" />
         </div>
       </div>
-      <hr className="border-[#754ffe] sm:mx-[5rem] md:mx-[9rem] border-[1.5px]" />
+      <hr className="border-[#754ffe] sm:mx-[3rem] md:mx-[9rem] border-[1.5px]" />
       <div
         id="Upcoming"
         className="mt-[2rem] flex flex-col items-center justify-center"

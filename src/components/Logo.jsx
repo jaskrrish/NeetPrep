@@ -7,7 +7,7 @@ const Logo = () => {
       <img
         src={logo}
         alt="NEET FODO"
-        className="w-[8.5rem] h-[5.5rem] mx-auto"
+        className="sm:w-[8rem] sm:h-[5rem] h-[4.5rem] w-[7rem] mx-auto"
       />
     </div>
   );
